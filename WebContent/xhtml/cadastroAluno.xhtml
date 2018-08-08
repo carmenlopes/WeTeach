@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui">
+<h:head>
+	<title>WeTeach</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel='stylesheet'
+		href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css' />
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/css/estilo.css" />
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/css/Estilo.min.css" />
+
+</h:head>
+<h:body>
+	<header>
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container-fluid">
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed"
+						data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+						aria-expanded="false">
+						<span class="sr-only">Toggle navigation</span> <span
+							class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="login.xhtml">WeTeach</a>
+				</div>
+
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse"
+					id="bs-example-navbar-collapse-1">
+					<h:form>
+						<ul class="nav navbar-nav navbar-right">
+							<li class="dropdown" style="margin-top: 5px; margin-right: 5px;">Já
+								possui conta?<a href="#" class="dropdown-toggle"
+								data-toggle="dropdown" role="button" aria-haspopup="true"
+								aria-expanded="false"
+								style="padding-top: 0px; padding-bottom: 0px;">Entre aqui </a>
+								<ul class="dropdown-menu"
+									style="padding-left: 5px; padding-right: 5px;">
+									<h:form id="dialogoLogin" enctype="multipart/form-data">
+										<li><h:outputLabel for="username" value="Email:" /> <p:inputText
+												id="username" value="#{loginMB.email}" required="true"
+												label="username" /></li>
+										<li><h:outputLabel for="password" value="Senha:" /> <p:password
+												id="password" value="#{loginMB.senha}" required="true"
+												label="password" /></li>
+										<li><p:commandButton value="Entrar"
+												action="#{loginMB.acaoAutenticar}" ajax="false"
+												oncomplete="handleLoginRequest(xhr, status, args)" /></li>
+									</h:form>
+								</ul>
+							</li>
+						</ul>
+					</h:form>
+				</div>
+				<!-- /.navbar-collapse -->
+			</div>
+			<!-- /.container-fluid -->
+		</nav>
+	</header>
+	<p:growl life="5000" />
+	<h:form class="teste" enctype="multipart/form-data">
+
+		<div class="col-md-8 col-md-offset-2" style="top: 50px;">
+			<h2>Crie sua conta</h2>
+			<div class="box">
+				<div class="box-header with-border">
+					<h3 class="box-title">Dados Pessoais</h3>
+				</div>
+
+				<div class="row" style="margin-top: 18px;">
+					<div class="col-md-6">
+						<div class="form-group">
+							<h:outputText value="Nome:* " class="col-sm-3 control-label" />
+							<p:inputText value="#{alunoMB.aluno.nome}" required="true" requiredMessage="Campo nome é obrigatório"/>
+
+						</div>
+						<div class="form-group">
+							<h:outputText value="Sobrenome:*" class="col-sm-3 control-label" />
+							<p:inputText value="#{alunoMB.aluno.sobrenome}" required="true"
+								label="sobrenome" requiredMessage="Campo sobrenome é obrigatório"/>
+						</div>
+						<div class="form-group">
+							<h:outputText value="Sexo:" class="col-sm-3 control-label" />
+							<b:radiobutton value="#{alunoMB.aluno.sexo}" class="radio-inline"
+								style="margin-top: 0px;padding-left: 0px;">
+								<f:selectItem itemValue="Feminino" itemLabel="Feminino" />
+								<f:selectItem itemValue="Masculino" itemLabel="Masculino" />
+							</b:radiobutton>
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<div class="form-group">
+							<h:outputText value="Data de Nascimento:"
+								class="col-sm-3 control-label" />
+							<p:inputMask id="date" value="#{alunoMB.aluno.datanasc}"
+								mask="99/99/9999" requiredMessage="O Campo Data é obrigatório." />
+						</div>
+						<div class="form-group">
+							<h:outputText value="Localização:" class="col-sm-3 control-label" />
+							<p:inputText value="#{alunoMB.aluno.localizacao}" />
+						</div>
+						<div class="form-group">
+							<h:outputText value="Foto de perfil:"
+								class="col-sm-3 control-label" />
+							<h:inputFile id="foto" value="#{alunoMB.file}">
+							</h:inputFile>
+						</div>
+					</div>
+				</div>
+
+				<div class="box-header with-border">
+					<h3 class="box-title">Informações de Acesso</h3>
+				</div>
+				<div class="row" style="margin-top: 18px;">
+					<div class="col-md-6">
+						<div class="form-group">
+							<h:outputText value="Email: *" class="col-sm-3 control-label" />
+							<p:inputText value="#{alunoMB.aluno.email}" required="true" requiredMessage="Campo email é obrigatório"/>
+						</div>
+						<div class="form-group">
+							<h:outputText value="Confirme o Email: *"
+								class="col-sm-3 control-label" />
+							<p:inputText value="#{alunoMB.aluno.email}" />
+						</div>
+
+					</div>
+					<div class="col-md-6">
+						<div class="form-group">
+							<h:outputText value="Senha: " class="col-sm-3 control-label" />
+							<p:password id="pwd1" value="#{alunoMB.aluno.senha}" match="pwd2"
+								label="Password 1" required="true" requiredMessage="Campo senha é obrigatório"/>
+						</div>
+						<div class="form-group">
+							<h:outputText value="Confirme a Senha: "
+								class="col-sm-3 control-label" />
+							<p:password id="pwd2" value="#{alunoMB.aluno.senha}"
+								label="Password 2" />
+						</div>
+					</div>
+				</div>
+				<div class="box-footer clearfix">
+						<h:selectBooleanCheckbox required="true" style="margin-left: 54%;" />
+							Concordo com a <a data-toggle="modal" data-target="#myModal">política
+							de regras</a>
+					<h:form>
+						<p:commandButton id="btnSalvar" action="#{alunoMB.acaoSalvar}"
+							value="Salvar" style="float:right;" ajax="false" />
+					</h:form>
+				</div>
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+					aria-labelledby="myModalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+								</button>
+								<h4 class="modal-title" id="myModalLabel">Política de
+									regras</h4>
+							</div>
+							<div class="modal-body">
+								<h:form>
+									<p>1 - O usuário somente poderá fazer o upload de vídeo
+										de própria autoria.</p>
+									<p>2 - Não é permitido vídeos de conteúdo explícito.</p>
+									<p>3 - Não é permitido perfis fakes.</p>
+									<p>4 - Não é permitido calúnias ou difamações (Esta regra
+										abrange tanto Vídeo quanto Comentário).</p>
+									<p>5 - Somente reportar um problema se o mesmo não se
+										enquadrar dentro das políticas e regras.</p>
+								</h:form>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- /.box -->
+		</div>
+		<!-- /.col-->
+	</h:form>
+	<script src='http://code.jquery.com/jquery-2.1.3.min.js'></script>
+	<script
+		src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
+	<script>
+		$(function() {
+			$('.dropdown-toggle').dropdown();
+		});
+	</script>
+
+</h:body>
+</html>

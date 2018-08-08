@@ -1,0 +1,188 @@
+@CHARSET "ISO-8859-1";
+
+.ui-growl {
+top:100px;
+}
+
+.navbar-default .navbar-nav > li > a{
+	color: #171616;
+}
+
+
+/*Configuração do Breadcrumb*/
+.content-header {
+	margin-top: 50px;
+}
+
+#titulo-breadcrumb {
+	font-size: 22px;
+	font-family: cursive;
+}
+
+.breadcrumb {
+	background-color: transparent;
+}
+/*Fim da configuração do Breadcrumb*/
+.ui-widget-header {
+	background: aliceblue;
+}
+
+.navbar-form {
+	margin-left: 330px;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html, body {
+	height: 100%;
+}
+
+body {
+	font-family: "Droid Sans", Arial, Sans-serif;
+	margin: 0;
+	overflow-x: hidden;
+	background-color: #ECF0F5;
+}
+
+a {
+	color: #3c3c3c;
+}
+
+.geral {
+	min-height: 100%;
+	position: relative;
+	width: 100%;
+}
+
+/*COMECO DO CABECALHO*/
+#logo a {
+	color: black;
+}
+
+.navbar-brand {
+	margin-top: 1px;
+	margin-left: 3%;
+	color: white;
+	font-size: 22px;
+}
+
+.container {
+	height: 3px;
+	max-width: 1280px;
+	width: 100%;
+	margin: 0 auto;
+	padding: 0 7px;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.main-header {
+	z-index: 1;
+	background: rgba(60, 141, 188, 0.95);
+}
+
+.navbar-default { /*Mundança na configuração padrão do Bootstrap*/
+	background-color: rgb(60, 141, 188);
+	border-color: rgba(255, 255, 255, 0.15);
+	border-radius: 0px;
+	color: black;
+}
+
+/*FINAL DO CABECALHO*/
+
+/*COMECO DA PARTE DO MENU LATERAL*/
+.sidebar {
+	top: 0;
+	left: 0;
+	background-color: #1E282C;
+	min-height: 150%;
+	position: fixed;
+	width: 220px;
+	padding-bottom: 10px;
+	display: block;
+}
+/*Inicio da area de imagem do usuario*/
+.painel-usuario {
+	background-color: #222D32;
+}
+
+.img-circle {
+	margin-top: 65px;
+	margin-left: 75px;
+	border-radius: 70%;
+	width: 75px;
+}
+
+/*Fim da area de imagem do usuario */
+#ver-perfil {
+	text-decoration: none;
+	color: white;
+	font-size: 14px;
+}
+
+.info-usuario {
+	color: white;
+	font-size: 20px;
+	text-align: center;
+}
+
+.menu {
+	padding-top: 4%;
+}
+
+#opcao {
+	padding-left: 11px;
+}
+
+.menu a {
+	color: #97B3C9;
+	font-size: 19px;
+	line-height: 2;
+	text-decoration: none;
+}
+
+.menu a:hover {
+	text-decoration: none;
+}
+
+#opcao:hover {
+	line-height: 1;
+	background-color: black;
+	border-left-color: #4592BF;
+	border-left-width: 3px;
+	border-left-style: ridge;
+	padding-left: 8px;
+}
+/*FINAL DA PARTE DO MENU LATERAL*/
+.conteudo {
+	padding-left: 10px;
+	margin-left: 220px;
+	overflow: hidden;
+}
+
+.clearfix:before, .clearfix:after {
+	content: "";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+.clearfix {
+	*zoom: 1;
+}
+
+/*Footer
+.main-footer {
+	background: #fff;
+	border-top: 1px solid #d2d6de;
+}*/
+p {
+	line-height: 1.2;
+	font-size: 140%;
+}

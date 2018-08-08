@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui">
+<ui:composition template="/xhtml/admin/modelo.xhtml">
+	<!-- Página que vai mostrar todos os vídeos que precisam ser aprovados -->
+	<ui:define name="conteudo">
+		<section class="content-header" style="margin-top: 50px;">
+			<h1>Vídeos Pendentes</h1>
+			<ol class="breadcrumb">
+				<li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+				<li class="active">Vídeos Pendentes</li>
+			</ol>
+		</section>
+
+		<h:form id="form"
+			style="margin-top:10px;margin-right:1%;background:ghostwhite;padding-top:1%;padding-left: 10px;padding-right: 10px;border-radius: 5px;">
+			<p:growl life="5000" />
+
+			<b:dataTable value="#{adminMB.getVerificarSituacao()}" var="video"
+				lang="Brazilian Portuguese"
+				custom-lang-url="//cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json"
+				style="background-color:aliceblue;">
+				<b:dataTableColumn style="width: 200px;">
+					<f:facet name="header">
+						<ul
+							style="margin-bottom: 0; list-style-type: none; padding-left: 0;">
+							<li>Vídeo</li>
+						</ul>
+					</f:facet>
+					<p:lightBox id="lighbox2">
+						<h:outputLink value="#">
+							<h:graphicImage url="#{video.imgVideo}" width="310" height="140" />
+						</h:outputLink>
+						<f:facet name="inline">
+							<iframe src="#{video.link}" width="800" height="600" />
+						</f:facet>
+					</p:lightBox>
+
+					<br />
+
+				</b:dataTableColumn>
+				<b:dataTableColumn>
+					<f:facet name="header">
+						<ul
+							style="margin-bottom: 0; list-style-type: none; padding-left: 0">
+							<li>Título</li>
+							<li>Descrição</li>
+							<li>Situação</li>
+						</ul>
+					</f:facet>
+        #{video.titulo}<br />
+       #{video.descricao}<br />
+       #{video.situacao}
+      </b:dataTableColumn><b:dataTableColumn>
+					<f:facet name="header">
+						<ul
+							style="margin-bottom: 0; list-style-type: none; padding-left: 0">
+							<li>Autor</li>
+							
+						</ul>
+					</f:facet>
+        #{video.autor.nome} #{video.autor.sobrenome}
+      </b:dataTableColumn>
+				<b:dataTableColumn>
+					<f:facet name="header">
+						<ul
+							style="margin-bottom: 0; list-style-type: none; padding-left: 0">
+							<li>Data de envio</li>
+						</ul>
+					</f:facet>
+					<h:outputText value="#{video.dataUpload}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+							timeZone="America/Sao_Paulo" />
+					</h:outputText>
+				</b:dataTableColumn>
+				<b:dataTableColumn style="width: 200px;">
+					<f:facet name="header">
+						<ul
+							style="margin-bottom: 0; list-style-type: none; padding-left: 0">
+							<li>Ações</li>
+						</ul>
+					</f:facet>
+					<br />
+					<b:buttonGroup>
+						<b:commandButton value="Aprovar" icon="glyphicon glyphicon-ok"
+							ajax="false" action="#{adminMB.videoAprovado}"
+							actionListener="#{notifyMB.msgAprovadoVideo}" type="push"
+							immediate="true">
+							<f:param value="#{video.id}" name="itemId" />
+							<f:param value="#{video.autor.id}" name="alunoId" />
+						</b:commandButton>
+						<b:commandButton value="Recusar" icon="glyphicon glyphicon-remove"
+							ajax="false" type="push" action="#{adminMB.videoNegado}"
+							actionListener="#{notifyMB.msgRecusadoVideo}">
+							<f:param value="#{video.id}" name="itemId" />
+							<f:param value="#{video.autor.id}" name="alunoId" />
+						</b:commandButton>
+					</b:buttonGroup>
+				</b:dataTableColumn>
+			</b:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

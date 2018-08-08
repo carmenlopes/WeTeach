@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui">
+<ui:composition template="/xhtml/admin/modelo.xhtml">
+	<!-- Página que vai mostrar todos os vídeos que precisam ser aprovados -->
+	<ui:define name="conteudo">
+		<section class="content-header" style="margin-top: 50px;">
+			<h1>Últimos Associados</h1>
+			<ol class="breadcrumb">
+				<li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+				<li class="active">Últimos Associados</li>
+			</ol>
+		</section>
+
+			<p:growl life="5000" />
+		<h:form id="form"
+			style="margin-top:10px;margin-right:1%;background:ghostwhite;padding-top:1%;padding-left: 10px;padding-right: 10px;border-radius: 5px;">
+
+			<b:dataTable value="#{alunoMB.alunos}" var="aluno"
+				lang="Brazilian Portuguese"
+				custom-lang-url="//cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json"
+				style="background-color:aliceblue;">
+				<b:dataTableColumn style="width: 100px;">
+					<f:facet name="header">
+						<ul
+							style="margin-bottom: 0; list-style-type: none; padding-left: 0;">
+							<li>Usuário</li>
+						</ul>
+					</f:facet>
+					<img class="img-circle img-bordered-sm"
+						src="../#{aluno.fotoPerfil}" alt="user image"
+						style="margin-top: 0px; margin-left: 0px;" />
+					<br />
+				</b:dataTableColumn>
+				<b:dataTableColumn>
+					<f:facet name="header">
+						<ul
+							style="margin-bottom: 0; list-style-type: none; padding-left: 0">
+							<li>Nome</li>
+						</ul>
+					</f:facet>
+        #{aluno.nome} #{aluno.sobrenome}<br />
+				</b:dataTableColumn>
+				<b:dataTableColumn>
+					<f:facet name="header">
+						<ul
+							style="margin-bottom: 0; list-style-type: none; padding-left: 0">
+							<li>Curso</li>
+						</ul>
+					</f:facet>
+					#{aluno.curso}
+				</b:dataTableColumn>
+				<b:dataTableColumn>
+					<f:facet name="header">
+						<ul
+							style="margin-bottom: 0; list-style-type: none; padding-left: 0">
+							<li>Sexo</li>
+						</ul>
+					</f:facet>
+					#{aluno.sexo}
+				</b:dataTableColumn>
+				<b:dataTableColumn style="width: 100px;">
+					<f:facet name="header">
+						<ul
+							style="margin-bottom: 0; list-style-type: none; padding-left: 0">
+							<li>Criação da conta</li>
+						</ul>
+					</f:facet>
+					<h:outputText value="#{aluno.criacaoConta}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+							timeZone="America/Sao_Paulo" />
+					</h:outputText>
+					<br />
+				</b:dataTableColumn>
+
+				<b:dataTableColumn style="width: 200px;">
+					<f:facet name="header">
+						<ul
+							style="margin-bottom: 0; list-style-type: none; padding-left: 0">
+							<li>Ações</li>
+						</ul>
+					</f:facet>
+					<br />
+					<b:buttonGroup style="left:35px;">
+						<b:commandButton value="Excluir conta"
+							icon="glyphicon glyphicon-trash" ajax="false" type="push"
+							action="#{adminMB.excluirUsuario}">
+						</b:commandButton>
+					</b:buttonGroup>
+				</b:dataTableColumn>
+			</b:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

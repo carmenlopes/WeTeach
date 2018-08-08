@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui">
+<ui:composition template="/xhtml/aluno/modelo.xhtml">
+	<ui:define name="conteudo">
+		<section class="content-header" style="margin-top: 4%;">
+			<h1>Alterar Dados</h1>
+			<ol class="breadcrumb">
+				<li><a href="#"><i class=" fa fa-dashboard"></i>
+						Home</a></li>
+				<li class="active">Alterar Dados</li>
+			</ol>
+		</section>
+
+		<h:form class="teste" enctype="multipart/form-data">
+			<div class="col-md-8 col-md-offset-2" style="top: 10px;">
+				<div class="box">
+					<div class="box-header with-border">
+						<h3 class="box-title">Dados Pessoais</h3>
+					</div>
+
+					<div class="row" style="margin-top: 18px;">
+						<div class="col-md-6">
+							<div class="form-group">
+								<h:outputText value="Nome:*" class="col-sm-3 control-label" />
+								<p:inputText value="#{alunoMB.aluno.nome}" required="true" />
+							</div>
+							<div class="form-group">
+								<h:outputText value="Sobrenome:*" class="col-sm-3 control-label" />
+								<p:inputText value="#{alunoMB.aluno.sobrenome}" required="true"
+									label="sobrenome" />
+							</div>
+							<div class="form-group">
+								<h:outputText value="Sexo:" class="col-sm-3 control-label" />
+								<b:radiobutton value="#{alunoMB.aluno.sexo}"
+									class="radio-inline" style="margin-top: 0px;padding-left: 0px;">
+									<f:selectItem itemValue="Feminino" itemLabel="Feminino" />
+									<f:selectItem itemValue="Masculino" itemLabel="Masculino" />
+								</b:radiobutton>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<h:outputText value="Data de Nascimento: "
+									class="col-sm-3 control-label" />
+								<p:inputMask id="date" value="#{alunoMB.aluno.datanasc}"
+									mask="99/99/9999" requiredMessage="O Campo Data é obrigatório." />
+							</div>
+							<div class="form-group">
+								<h:outputText value="Localização:"
+									class="col-sm-3 control-label" />
+								<p:inputText value="#{alunoMB.aluno.localizacao}" />
+							</div>
+							<div class="form-group">
+								<h:outputText value="Foto de perfil:"
+									class="col-sm-3 control-label" />
+								<h:inputFile id="foto" value="#{alunoMB.file}">
+								</h:inputFile>
+							</div>
+						</div>
+					</div>
+
+					<div class="box-header with-border">
+						<h3 class="box-title">Informações de Acesso</h3>
+					</div>
+					<div class="row" style="margin-top: 18px;">
+						<div class="col-md-6">
+							<div class="form-group">
+								<h:outputText value="Email:*" class="col-sm-3 control-label" />
+								<p:inputText value="#{alunoMB.aluno.email}" required="true" />
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<h:outputLabel value="Senha:" class="col-sm-3 control-label" />
+								<p:password id="senha" value="#{alunoMB.aluno.senha}" />
+							</div>
+						</div>
+					</div>
+					<div class="box-footer clearfix">
+						<h:panelGroup layout="block" style="text-align: center">
+							<p:commandButton ajax="false" id="btnSalvar"
+								action="#{alunoMB.salvarAlteracoes}" value="Salvar"
+								update="@all"></p:commandButton>
+							<p:commandButton ajax="false" id="btnCancelar"
+								action="#{alunoMB.acaoCancelar}" immediate="true"
+								value="Cancelar"></p:commandButton>
+						</h:panelGroup>
+
+					</div>
+				</div>
+				<!-- /.box -->
+			</div>
+			<!-- /.col-->
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui">
+<ui:composition template="/xhtml/aluno/modelo.xhtml">
+	<ui:define name="conteudo">
+
+		<section class="content-header" style="margin-top: 5%;">
+			<h1>
+				Meus Vídeos<SMALL>Painel de Controle</SMALL>
+			</h1>
+			<ol class="breadcrumb">
+				<li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
+				<li class="active">Meus Vídeos</li>
+			</ol>
+
+		</section>
+
+		<p:growl life="5000" />
+		<h:form style="margin-right:10px;margin-left:10px;margin-top:1%;">
+
+			<b:dataTable value="#{videoMB.getVideos(loginMB.aluno.id)}"
+				var="video" lang="Brazilian Portuguese"
+				custom-lang-url="//cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json"
+				page-length-menu="[5,10,50,100]"
+				style="background-color:aliceblue;border-radius: 5px;">
+				<b:dataTableColumn style="width: 200px;">
+					<f:facet name="header">
+						<ul
+							style="margin-bottom: 0; list-style-type: none; padding-left: 0;">
+							<li>Vídeo</li>
+						</ul>
+					</f:facet>
+					<a href="paginaVideo.xhtml?id=#{video.id}"> <h:graphicImage
+							url="#{video.imgVideo}" width="330" height="140" />
+					</a>
+					<br />
+				</b:dataTableColumn>
+				<b:dataTableColumn>
+					<f:facet name="header">
+						<ul
+							style="margin-bottom: 0; list-style-type: none; padding-left: 0">
+							<li>Título</li>
+							<li>Visualizações</li>
+						</ul>
+					</f:facet>
+        #{video.titulo}<br />
+       #{video.visualizacoes} visualizações
+       
+      </b:dataTableColumn>
+				<b:dataTableColumn>
+					<f:facet name="header">
+						<ul
+							style="margin-bottom: 0; list-style-type: none; padding-left: 0">
+							<li>Categoria</li>
+						</ul>
+					</f:facet>
+					 #{video.tag}
+      </b:dataTableColumn>
+				<b:dataTableColumn style="width: 200px;">
+					<f:facet name="header">
+						<ul
+							style="margin-bottom: 0; list-style-type: none; padding-left: 0">
+							<li>Ações</li>
+						</ul>
+					</f:facet>
+					<br />
+					<b:buttonGroup>
+						<b:commandButton value="Editar" icon="edit" ajax="false"
+							action="#{videoMB.acaoAlterar}" type="push" immediate="true">
+							<f:param value="#{video.id}" name="itemId" />
+						</b:commandButton>
+						<b:commandButton value="Excluir" icon="trash" ajax="false"
+							type="push" action="#{videoMB.acaoExcluir}" immediate="true">
+							<f:param value="#{video.id}" name="itemId" />
+						</b:commandButton>
+					</b:buttonGroup>
+				</b:dataTableColumn>
+			</b:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

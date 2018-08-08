@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui">
+<ui:composition template="/xhtml/aluno/modelo.xhtml">
+	<ui:define name="conteudo">
+		<h:body>
+			<f:metadata>
+				<f:viewParam id="id" name="id" value="#{videoMB.id}" />
+				<f:viewAction action="#{videoMB.carregarVideo()}"></f:viewAction>
+			</f:metadata>
+			<!-- 	<section class="content-header" >
+			<h1>Meus Vídeos</h1>
+			<ol class="breadcrumb">
+				<li><a href="#"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+				<li class="active">Meus Vídeos</li>
+			</ol>
+		</section>  -->
+			<div class="row" style="margin-left: 2%; margin-top: 6%;">
+				<div class="col-md-3">
+					<div class="box box-primary">
+						<div class="box-body box-profile">
+							<h:form id="fotoUsu" enctype="multipart/form-data">
+								<h:graphicImage
+									class="profile-user-img img-responsive img-circle"
+									value="../#{videoMB.video.autor.fotoPerfil}" />
+							</h:form>
+							<h3 class="profile-username text-center">#{videoMB.video.autor.nome}</h3>
+
+							<p class="text-muted text-center">Sistemas de Informação</p>
+
+							<ul class="list-group list-group-unbordered">
+								<li class="list-group-item"><b>Seguidores</b> <a
+									class="pull-right">0</a></li>
+								<li class="list-group-item"><b>Seguindo</b> <a
+									class="pull-right">0</a></li>
+							</ul>
+							<p:selectBooleanButton id="value1" value="Seguir"
+								offLabel="Seguir"
+								onLabel="Deixar de seguir"
+								styleClass="btn btn-primary btn-block">
+							</p:selectBooleanButton>
+							<!-- <a href="#" class="btn btn-primary btn-block"><b>Seguir</b></a> -->
+						</div>
+						<!-- /.box-body -->
+					</div>
+					<!-- About Me Box -->
+					<div class="box box-primary">
+						<div class="box-header with-border">
+							<h3 class="box-title">Sobre mim</h3>
+						</div>
+						<!-- /.box-header -->
+						<div class="box-body">
+							<strong><i class="fa fa-book margin-r-5"></i> Educação</strong>
+
+							<p class="text-muted">Universidade do Grande Rio</p>
+							<hr />
+							<strong><i class="fa fa-map-marker margin-r-5"></i>
+								Localização </strong>
+
+							<p class="text-muted">#{videoMB.video.autor.localizacao}, Rio de Janeiro</p>
+
+							<hr />
+							<strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
+
+							<p>
+								<span class="label label-danger">UI Design</span> <span
+									class="label label-success">Coding</span> <span
+									class="label label-info">Javascript</span> <span
+									class="label label-warning">PHP</span> <span
+									class="label label-primary">Node.js</span>
+							</p>
+
+						</div>
+						<!-- /.box-body -->
+					</div>
+					<!-- /.box -->
+				</div>
+				<!-- /.col -->
+				<div class="col-md-8">
+					<div class="nav-tabs-custom">
+						<ul class="nav nav-tabs">
+							<li class="active"><a href="#activity" data-toggle="tab">Feed</a></li>
+							<!-- <li><a href="#timeline" data-toggle="tab">Timeline</a></li>
+              <li><a href="#settings" data-toggle="tab">Settings</a></li> -->
+						</ul>
+						<div class="tab-content">
+
+							<div class="active tab-pane" id="activity">
+								<!-- Post -->
+								<ui:repeat var="video"
+									value="#{videoMB.getVideos(videoMB.video.autor.id)}">
+									<div class="post">
+										<div class="user-block" style="margin-bottom: 0px;">
+											<span class="username" style="margin-left: 5px;"> <a
+												href="#">#{video.titulo}</a> <a href="#"
+												class="pull-right btn-box-tool"><i class="fa fa-times"></i></a>
+											</span> <span class="description" style="margin-left: 5px;"><STRONG>Publicado
+													- </STRONG> <h:outputLabel value="#{video.dataUpload}">
+													<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+														timeZone="America/Sao_Paulo" />
+												</h:outputLabel></span>
+										</div>
+										<!-- /.user-block -->
+										<div class="video-container">
+											<iframe width="800" height="600" src="#{video.link}" />
+										</div>
+										<ul class="list-inline">
+											<li><a href="#" class="link-black text-sm"><i
+													class="fa fa-share margin-r-5"></i> Compartilhar</a></li>
+											<li><a href="#" class="link-black text-sm"><i
+													class="fa fa-thumbs-o-up margin-r-5"></i> Curtir</a></li>
+											<li class="pull-right"><a href="#"
+												class="link-black text-sm"><i
+													class="fa fa-comments-o margin-r-5"></i> Comentar</a></li>
+										</ul>
+									</div>
+									<!-- /.post -->
+								</ui:repeat>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</h:body>
+	</ui:define>
+</ui:composition>
+</html>

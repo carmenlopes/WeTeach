@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui">
+<ui:composition template="/xhtml/aluno/modelo.xhtml">
+	<ui:define name="conteudo">
+
+		<section class="content-header" style="margin-top: 5%;">
+			<h1>Resultado da busca</h1>
+			<ol class="breadcrumb">
+				<li><a href="#"><i class="fa fa-dashboard"></i>Home</a></li>
+				<li class="active">Resultado da busca</li>
+			</ol>
+
+		</section>
+
+		<p:growl life="5000" />
+		<h:form style="margin-right:10px;margin-left:10px;margin-top:1%;">
+
+			<p:dataGrid var="video"
+				value="#{videoMB.getBuscaTag(videoMB.campoBusca)}" columns="3"
+				layout="grid" rows="12" paginator="true" id="videos"
+				paginatorTemplate="{CurrentPageReport}  {PreviousPageLink} {PageLinks} {NextPageLink}  {RowsPerPageDropdown}"
+				rowsPerPageTemplate="5,12,16">
+
+				<p:panel header="#{video.titulo}" style="text-align:center">
+					<h:panelGrid columns="1" style="width:100%">
+						<a href="paginaVideo.xhtml?id=#{video.id}"> <img
+							class="responsive-img" src="#{video.imgVideo}" />
+						</a>
+						<h:outputText
+							value="Enviado por: #{video.autor.nome} #{video.autor.sobrenome}" />
+
+					</h:panelGrid>
+				</p:panel>
+
+			</p:dataGrid>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/xhtml/admin/modelo.xhtml">
+	<ui:define name="conteudo">
+		<section class="content-header" style="margin-top: 50px">
+			<h1>
+				Dashboard <small>Painel de Controle</small>
+			</h1>
+			<ol class="breadcrumb">
+				<li class="active"><a href="dashboard.xhtml"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+			</ol>
+		</section>
+
+		<!-- Main content -->
+		<section class="content" style="padding-top: 5px; padding-bottom: 0px;">
+			<div class="row">
+				<div class="col-lg-3 col-xs-6">
+					<!-- small box -->
+					<div class="small-box bg-aqua">
+						<div class="inner">
+							<h3>20</h3>
+							<p>Vídeos Pendentes</p>
+						</div>
+						<div class="icon">
+							<i class="ion-social-youtube"></i>
+						</div>
+						<a href="videosPendentes.xhtml" class="small-box-footer">Mais
+							informações <i class="fa fa-arrow-circle-right"></i>
+						</a>
+					</div>
+				</div>
+				<!-- ./col -->
+				<div class="col-lg-3 col-xs-6">
+					<!-- small box -->
+					<div class="small-box bg-green">
+						<div class="inner">
+							<h3>15</h3>
+
+							<p>Comentários p/ análise</p>
+						</div>
+						<div class="icon">
+							<i class="ion-ios-chatbubble"></i>
+						</div>
+						<a href="comentPendentes.xhtml" class="small-box-footer">Mais informações <i
+							class="fa fa-arrow-circle-right"></i></a>
+					</div>
+				</div>
+				<!-- ./col -->
+				<div class="col-lg-3 col-xs-6">
+					<!-- small box -->
+					<div class="small-box bg-yellow">
+						<div class="inner">
+							<h3>4</h3>
+							<p>Novos Usuários</p>
+						</div>
+						<div class="icon">
+							<i class="ion ion-person-add"></i>
+						</div>
+						<a href="ultimosUsuarios.xhtml" class="small-box-footer">Mais informações <i
+							class="fa fa-arrow-circle-right"></i></a>
+					</div>
+				</div>
+				<!-- ./col -->
+				<div class="col-lg-3 col-xs-6">
+					<!-- small box -->
+					<div class="small-box bg-red">
+						<div class="inner">
+							<h3>0</h3>
+							<p>Problemas Relatados</p>
+						</div>
+						<div class="icon">
+							<i class="ion-android-warning"></i>
+						</div>
+						<a href="problemas.xhtml" class="small-box-footer">Mais informações <i
+							class="fa fa-arrow-circle-right"></i></a>
+					</div>
+				</div>
+				<!-- ./col -->
+			</div>
+			<!-- ./row -->
+			<div class="row">
+				<!-- Left col -->
+				<section class="col-lg-7 connectedSortable">
+					<!-- Custom tabs (Charts with tabs)-->
+					<div class="nav-tabs-custom">
+						<!-- Tabs within a box -->
+						<ul class="nav nav-tabs pull-right">
+							<li class="pull-left header"><i class="fa fa-line-chart"></i>
+								Upload de Vídeos</li>
+						</ul>
+						<div class="tab-content no-padding">
+							<div class="chart-responsive">
+								<p:chart type="line" model="#{adminMB.lineModel2}"
+									style="height:290px;" responsive="true" />
+							</div>
+						</div>
+					</div>
+				</section>
+				<section class="col-lg-5 connectedSortable">
+					<div class="nav-tabs-custom">
+						<div class="box-header with-border">
+							<h3 class="box-title">
+								<i class="fa  fa-pie-chart"></i> Categorias
+							</h3>
+						</div>
+						<!-- /.box-header -->
+						<div class="row">
+							<div class="col-md-8">
+								<div class="chart-responsive">
+									<p:chart type="pie" model="#{adminMB.pieModel1}"
+										style="height:285px;width:138%;position: relative;left: 12px;" />
+								</div>
+								<!-- ./chart-responsive -->
+							</div>
+							<!-- /.col -->
+						</div>
+						<!-- /.row -->
+					</div>
+					<!-- /.box -->
+				</section>
+			</div>
+		</section>
+	</ui:define>
+</ui:composition>
+</html>

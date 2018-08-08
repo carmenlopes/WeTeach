@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui">
+<ui:composition template="/xhtml/admin/modelo.xhtml">
+	<ui:define name="conteudo">
+		<section class="content-header" style="margin-top: 50px">
+			<h1>Cadastrar novo administrador</h1>
+			<ol class="breadcrumb">
+				<li><a href="#"><i class="fa fa-dashboard"></i>Dashboard</a></li>
+				<li class="active">Cadastro admin</li>
+			</ol>
+		</section>
+		<p:growl life="5000" />
+		<h:form class="teste" enctype="multipart/form-data">
+
+			<div class="col-md-12">
+
+				<div class="box" style="top: 15px;">
+					<div class="box-header with-border">
+						<h3 class="box-title">Dados Pessoais</h3>
+					</div>
+
+					<div class="row" style="margin-top: 18px;">
+						<div class="col-md-6">
+							<div class="form-group">
+								<h:outputText value="Nome: * " class="col-sm-3 control-label" />
+								<p:inputText value="#{adminMB.admin.nome}" required="true" />
+							</div>
+							<div class="form-group">
+								<h:outputText value="Sobrenome: * "
+									class="col-sm-3 control-label" />
+								<p:inputText value="#{adminMB.admin.sobrenome}" required="true"
+									label="sobrenome" />
+							</div>
+							<div class="form-group">
+								<h:outputText value="Sexo:" class="col-sm-3 control-label" />
+								<b:radiobutton value="#{adminMB.admin.sexo}"
+									class="radio-inline" style="margin-top: 0px;padding-left: 0px;">
+									<f:selectItem itemValue="Feminino" itemLabel="Feminino" />
+									<f:selectItem itemValue="Masculino" itemLabel="Masculino" />
+								</b:radiobutton>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<h:outputText value="Data de Nascimento: "
+									class="col-sm-3 control-label" />
+								<p:inputMask id="date" value="#{adminMB.admin.datanasc}"
+									mask="99/99/9999" requiredMessage="O Campo Data é obrigatório." />
+							</div>
+							<div class="form-group">
+								<h:outputText value="Foto de perfil:"
+									class="col-sm-3 control-label" />
+								<h:inputFile id="foto" value="#{adminMB.file}">
+								</h:inputFile>
+							</div>
+						</div>
+					</div>
+
+					<div class="box-header with-border">
+						<h3 class="box-title">Informações de Acesso</h3>
+					</div>
+					<div class="row" style="margin-top: 18px;">
+						<div class="col-md-6">
+							<div class="form-group">
+								<h:outputText value="CPF: *" class="col-sm-3 control-label"/>
+								<p:inputMask id="cpf"
+									value="#{adminMB.admin.cpf}" placeholder="CPF"
+									mask="999.999.999-99"/>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+
+								<h:outputText value="Senha: "  class="col-sm-3 control-label"/>
+								<p:password id="pwd1" value="#{adminMB.admin.senha}"
+									match="pwd2" label="Password 1" required="true" />
+							</div>
+							<div class="form-group">
+
+								<h:outputText value="Confirme a Senha: "  class="col-sm-3 control-label"/>
+								<p:password id="pwd2" value="#{adminMB.admin.senha}"
+									label="Password 2" required="true" />
+							</div>
+						</div>
+					</div>
+
+
+					<div class="box-footer clearfix">
+						<h:form>
+							<p:commandButton id="btnSalvar" action="#{adminMB.acaoSalvar}"
+								value="Salvar" style="float:right;" ajax="false"
+								update="matchGrid" />
+						</h:form>
+					</div>
+				</div>
+				<!-- /.box -->
+			</div>
+			<!-- /.col-->
+		</h:form>
+
+
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui">
+<h:head>
+	<title>WeTeach</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="../../css/admin.css" />
+	<link rel="stylesheet" type="text/css"
+		href="../../css/Estilo.min.css" />
+	<link rel="stylesheet"
+		href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" />
+
+</h:head>
+<h:body>
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+					aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="dashboard.xhtml" style="color:white;">WeTeach</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<!-- Barra de busca -->
+				<h:form
+					class="navbar-form navbar-left hidden-md hidden-sm hidden-xs"
+					role="search" style="margin-left:225px;">
+
+					<b:inputText id="mybid" class="mybid-example"
+						value="#{videoMB.campoBusca}" placeholder="Pesquisar Vídeo"
+						style="width: 430px;border-bottom-left-radius: 4px;border-top-left-radius: 4px;margin-right:0px;">
+						<f:facet name="append">
+							<b:commandButton look="default" action="#{videoMB.acaoBuscar()}"
+								ajax="false" icon="search">
+							</b:commandButton>
+						</f:facet>
+					</b:inputText>
+				</h:form>
+				<!-- FIM DA Barra de busca -->
+				<h:form>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown" role="button" aria-haspopup="true"
+							aria-expanded="false" >#{loginMB.admin.nome} <span
+								class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="perfil.xhtml">Meu Perfil</a></li>
+								<li><h:commandLink action="#{adminMB.acaoAlterar}"
+										value="Editar Dados">
+										<f:param value="#{loginMB.admin.id}" name="itemId" />
+									</h:commandLink></li>
+								<li role="separator" class="divider"></li>
+								<li><h:commandLink value="Sair" action="#{loginMB.Logout}" /></li>
+							</ul></li>
+					</ul>
+				</h:form>
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+	<!-- MENU LATERAL -->
+	<h:form enctype="multipart/form-data">
+		<aside class="sidebar">
+			<div class="painel-usuario">
+				<div class="panel-image">
+					<img src="../#{loginMB.admin.fotoPerfil}" class="img-circle" />
+				</div>
+				<div class="info-usuario">
+					<h:outputLabel value="#{loginMB.admin.nome}" />
+					<BR /> <a id="ver-perfil" href="perfil.xhtml">Ver Perfil</a>
+				</div>
+			</div>
+			<div class="menu">
+				<ul>
+					<li id="opcao"><a href="dashboard.xhtml">Dashboard </a></li>
+					<li id="opcao"><a href="ultimosUsuarios.xhtml">Novas
+							Contas</a></li>
+					<li id="opcao"><a href="cadastroAdmin.xhtml">Conceder
+							admin</a></li>
+					<li id="opcao"><a href="videosPendentes.xhtml">Vídeos
+							Pendentes </a></li>
+					<li id="opcao"><a href="comentPendentes.xhtml">Comentários
+							Pendentes</a></li>
+					<li id="opcao"><a href="problemas.xhtml">Problemas
+							Relatados</a></li>
+				</ul>
+			</div>
+		</aside>
+	</h:form>
+	<!-- FIM DO MENU LATERAL -->
+	<!-- AREA DE CONTEUDO -->
+	<div class="conteudo">
+		<ui:insert name="conteudo" />
+	</div>
+	<!-- FIM DA AREA DE CONTEUDO -->
+	<script
+		src='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
+	<script>
+		$(function() {
+			$('.dropdown-toggle').dropdown();
+		});
+	</script>
+</h:body>
+</html>

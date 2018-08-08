@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+	<title>Login Administrador - WeTeach</title>
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+	<link rel="stylesheet" type="text/css" href="../css/login.css" />
+</h:head>
+
+<h:body>
+	<!-- NÃO ESTÁ RESPONSIVO -->
+	<h:form>
+		<div class="login-box-body">
+			<p:growl id="growl" showDetail="true" sticky="true" />
+
+			<p class="login-box-msg">
+				<img src="../img/logo.png" />
+			</p>
+			<div class="form-group has-feedback">
+				<p:inputMask id="cpf" styleClass="form-control"
+					value="#{loginMB.cpf}" placeholder="CPF" mask="999.999.999-99" />
+				<span class="glyphicon glyphicon-user form-control-feedback" />
+			</div>
+			<div class="form-group has-feedback">
+				<b:inputSecret type="password" class="form-control"
+					value="#{loginMB.senha}" placeholder="Senha" required="true"
+					requiredMessage="O Campo Senha é obrigatório." />
+				<span class="glyphicon glyphicon-lock form-control-feedback" />
+			</div>
+			<div class="row">
+				<div class="col-xs-8">
+					<div class="checkbox icheck">
+						<label> <input type="checkbox" /> Manter conectado
+						</label>
+					</div>
+				</div>
+				<!-- /.col -->
+				<div class="col-xs-4">
+					<h:commandButton styleClass="btn btn-primary btn-block btn-flat"
+						value="Entrar" action="#{loginMB.autenticarAdmin}" ajax="false" />
+				</div>
+				<!-- /.col -->
+
+			</div>
+			<hr />
+			<a href="#">Esqueci a senha</a><br />
+			 <a href="login.xhtml"><i class="fa fa-undo"/>Voltar</a>
+
+		</div>
+	</h:form>
+</h:body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui">
+
+<ui:composition template="/xhtml/admin/modelo.xhtml">
+	<ui:define name="conteudo">
+		<section class="content-header" style="margin-top: 50px;">
+			<h1>Problemas Relatados</h1>
+			<ol class="breadcrumb">
+				<li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+				<li class="active">Problemas Relatados</li>
+			</ol>
+		</section>
+
+
+		<h:form id="form"
+			style="margin-top:10px;margin-right:1%;background:ghostwhite;padding-top:1%;padding-left: 10px;padding-right: 10px;border-radius: 5px;">
+			<p:growl id="growl" sticky="true" />
+
+			<b:dataTable value="#{adminMB.listaProblemas}" var="problema"
+				lang="Brazilian Portuguese"
+				custom-lang-url="//cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json"
+				style="background-color:aliceblue;">
+				<b:dataTableColumn>
+					<f:facet name="header">
+						<ul
+							style="margin-bottom: 0; list-style-type: none; padding-left: 0">
+							<li>Problema relatado</li>
+						</ul>
+					</f:facet>
+					#{problema.texto}<br />
+				</b:dataTableColumn>
+				<b:dataTableColumn>
+					<f:facet name="header">
+						<ul
+							style="margin-bottom: 0; list-style-type: none; padding-left: 0">
+							<li>Autor do relato</li>
+						</ul>
+					</f:facet>
+					 #{problema.comentario.autor.nome}
+      </b:dataTableColumn>
+				<b:dataTableColumn>
+					<f:facet name="header">
+						<ul
+							style="margin-bottom: 0; list-style-type: none; padding-left: 0">
+							<li>Data do aviso</li>
+						</ul>
+					</f:facet>
+					 #{problema.comentario.autor.nome}
+      </b:dataTableColumn>
+				<b:dataTableColumn style="width: 200px;">
+					<f:facet name="header">
+						<ul
+							style="margin-bottom: 0; list-style-type: none; padding-left: 0">
+							<li>Ações</li>
+						</ul>
+					</f:facet>
+					<b:buttonGroup>
+						<b:commandButton value="Permitir" icon="glyphicon glyphicon-ok"
+							ajax="false" action="#{denunciaMB.permitirComentario}"
+							type="push" immediate="true">
+							<f:param value="#{denuncia.id}" name="itemId" />
+						</b:commandButton>
+						<b:commandButton value="Descartar"
+							icon="glyphicon glyphicon-remove" ajax="false" type="push"
+							action="#{comentarioMB.acaoExcluir}" immediate="true">
+							<f:param value="#{denuncia.comentario.id}" name="itemId" />
+						</b:commandButton>
+					</b:buttonGroup>
+				</b:dataTableColumn>
+			</b:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

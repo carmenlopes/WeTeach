@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui">
+<h:head>
+	<title>WeTeach</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="../css/login.css" />
+</h:head>
+<h:body>
+	<h:form>
+		<p:growl id="growl" showDetail="false" sticky="true" />
+		<div class="login-box-body" style="height: 330px;">
+			<p class="login-box-msg">
+				<h:graphicImage url="../img/logo.png" />
+				<br />
+			</p>
+			<h:outputText
+				value="Para receber a sua senha, informe o email cadastrado no site:"
+				style="color:#3282BC;font-size:16px" />
+			<div class="form-group has-feedback">
+				<b:inputText type="email" class="form-control"
+					id="exampleInputEmail1" value="#{loginMB.email}"
+					placeholder="Email cadastrado" required="true"
+					requiredMessage="O Campo Email é obrigatório." />
+				<span class="glyphicon glyphicon-envelope form-control-feedback" />
+			</div>
+			<div class="row">
+				<div class="col-md-5 col-md-offset-7">
+					<h:commandButton styleClass="btn btn-primary btn-block btn-flat"
+						value="Enviar senha" action="#{loginMB.acaoAutenticar}"
+						ajax="false" alt="Entrar" />
+				</div>
+				<!-- /.col -->
+			</div>
+			<hr />
+			<a href="login.xhtml"><i class="fa fa-undo" /> Voltar</a><br />
+		</div>
+	</h:form>
+
+</h:body>
+</html>

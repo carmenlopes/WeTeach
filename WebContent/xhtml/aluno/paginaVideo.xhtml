@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui">
+<ui:composition template="/xhtml/aluno/modelo.xhtml">
+	<ui:define name="conteudo">
+		<h:body>
+			<f:metadata>
+				<f:viewParam id="id" name="id" value="#{videoMB.id}" />
+				<f:viewAction action="#{videoMB.carregarVideo()}"></f:viewAction>
+			</f:metadata>
+			<p:growl life="5000" />
+
+			<div class="row" style="margin-top: 80px; margin-left: 1%;">
+				<div class="col-md-8">
+					<div class="box box-default">
+						<div class="box-header with-border">
+							<h3 class="box-title">#{videoMB.video.titulo}</h3>
+						</div>
+
+						<div class="video-container">
+							<h:inputHidden id="idUsuario" value="#{videoMB.video.id}" />
+							<!-- 	<h1>#{videoMB.video.titulo}</h1> -->
+							<iframe src="#{videoMB.video.link}" />
+						</div>
+					</div>
+					<h:form style="background-color: white;border-radius: 5px;">
+						<div class="row">
+							<div class="col-md-6">
+								<h4 style="padding-left: 5px;">Descrição do Vídeo:</h4>
+								<p style="padding-left: 5px;">#{videoMB.video.descricao}</p>
+							</div>
+							<div class="col-md-6 ">
+								<div>
+									<h4>#{videoMB.video.visualizacoes} Visualizações</h4>
+									<p:selectBooleanButton id="value1" value="#{videoMB.value1}"
+										offLabel="Curtir" onLabel="Curtido #{videoMB.video.positivo}"
+										style="width:120px;margin-top: 0px;margin-bottom: 10px;"
+										onIcon="fa fa-fw fa-thumbs-o-up"
+										offIcon="fa fa-fw fa-thumbs-o-up"
+										styleClass="btn btn-primary btn-block">
+										<p:ajax listener="#{videoMB.increment}" update="@this" />
+									</p:selectBooleanButton>
+
+									<p:selectBooleanButton id="value2" value="#{videoMB.value2}"
+										offLabel="Não gostar"
+										onLabel="Não gostei #{videoMB.video.negativo}"
+										style="width:140px;margin-top: 0px;margin-bottom: 10px;"
+										onIcon="fa fa-fw fa-thumbs-o-down"
+										offIcon="fa fa-fw fa-thumbs-o-down"
+										styleClass="btn btn-danger btn-block">
+										<p:ajax listener="#{videoMB.decrement}" update="@this" />
+									</p:selectBooleanButton>
+								</div>
+							</div>
+						</div>
+					</h:form>
+
+
+					<div style="margin-bottom: 20px;">
+						<h:form id="form" enctype="multipart/form-data">
+							<h4>Comentários:</h4>
+							<b:inputText id="comentario"
+								placeholder="Deixe sua opinião sobre o vídeo"
+								value="#{comentarioMB.comentario.texto}" maxlength="90"
+								style="height:50px;">
+								<f:facet name="append">
+									<b:commandButton look="primary" value="Enviar" ajax="false"
+										action="#{comentarioMB.acaoSalvar(video.id)}"
+										style="height:50px;" />
+								</f:facet>
+							</b:inputText>
+							<p:dataScroller
+								value="#{comentarioMB.getComentarios(videoMB.video.id)}"
+								var="comentario" chunkSize="10" mode="inline" scrollHeight="500">
+
+								<div class="user-block" style="margin-bottom: 0px;">
+									<img class="img-circle img-bordered-sm"
+										src="../#{comentario.autor.fotoPerfil}" alt="user image"
+										style="margin-top: 0px;" /><SPAN class="username"><a
+										href="paginaUsuario2.xhtml?id=#{comentario.autor.id}">
+											#{comentario.autor.nome}</a>
+										<div class="dropdown pull-right btn-box-tool">
+											<a class="dropdown-toggle" id="dropdownMenu1"
+												data-toggle="dropdown" aria-haspopup="true"
+												aria-expanded="true"> <SPAN
+												class="glyphicon glyphicon-option-vertical"></SPAN>
+											</a>
+											<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+												<li><a data-toggle="modal"
+													data-target="#myModal#{comentario.id}">Denunciar</a></li>
+												<li><h:commandLink action="#{comentarioMB.acaoExcluir}">Excluir<f:param
+															value="#{comentario.id}" name="itemId" />
+													</h:commandLink></li>
+											</ul>
+										</div></SPAN> <span class="description"><STRONG>Publicado -
+									</STRONG> <h:outputLabel value="#{comentario.dataEnvio}">
+											<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+												timeZone="America/Sao_Paulo" />
+										</h:outputLabel></span>
+									<h:outputText value="#{comentario.texto}"
+										style="font-weight: bold" />
+
+									<div class="modal fade" id="myModal#{comentario.id}"
+										tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+										<div class="modal-dialog" role="document">
+											<div class="modal-content">
+												<div class="modal-header">
+													<button type="button" class="close" data-dismiss="modal"
+														aria-label="Close">
+														<span aria-hidden="true"></span>
+													</button>
+													<h4 class="modal-title" id="myModalLabel">Denunciar
+														Comentário</h4>
+												</div>
+												<div class="modal-body">
+													<h:form>
+														<h:panelGrid columns="2" style="margin-bottom:10px"
+															cellpadding="5">
+															<p:selectOneRadio value="#{denunciaMB.denuncia.texto}"
+																layout="responsive" columns="3">
+																<f:selectItems value="#{denunciaMB.listaMsg}"
+																	var="denuncia" itemValue="#{texto}"
+																	itemLabel="#{texto}"></f:selectItems>
+															</p:selectOneRadio>
+														</h:panelGrid>
+													</h:form>
+
+												</div>
+												<div class="modal-footer">
+													<h:commandButton value="Cancelar" class="btn btn-default"
+														data-dismiss="modal" />
+													<h:commandButton class="btn btn-primary"
+														data-dismiss="modal" value="Denunciar"
+														action="#{denunciaMB.acaoDenunciar(comentario.id)}" />
+
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<hr />
+								</div>
+							</p:dataScroller>
+
+						</h:form>
+					</div>
+				</div>
+				<!-- Fim da primeira coluna -->
+				<div class="col-md-3">
+					<div class="box box-default">
+						<div class="box-header with-border">
+							<h3 class="box-title">Vídeos que talvez você goste</h3>
+						</div>
+						<ui:repeat var="video" value="#{videoMB.videosInteressantes}">
+							<div class="user-block">
+								<a href="paginaVideo.xhtml?id=#{video.id}"> <img
+									class="responsive-img" src="#{video.imgVideo}"
+									style="width: 100px; height: 85px; padding-left: 10px;" /></a> <a
+									href="paginaVideo.xhtml?id=#{video.id}"
+									style="padding-left: 10px;">#{video.titulo}</a>
+							</div>
+						</ui:repeat>
+					</div>
+				</div>
+			</div>
+
+		</h:body>
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,33 @@
+.cabecalho {
+	margin: 0;
+	padding: 0;
+	z-index: 1030;
+	height: 50px;
+	background: rgba(60, 141, 188, 0.95);
+}
+
+.logo {
+	margin-top: 10%;
+	margin-left: 3%;
+	color: white;
+	font-size: 22px;
+}
+
+#conta {
+	color: white;
+	padding-left: 75%;
+}
+
+#entrar {
+	color: white;
+	font-weight: bold;
+	padding-left: 93%;
+}
+
+.teste{
+    margin-top: 50px;
+    width: 1020px;
+    height: 300px;
+    margin-left: 150px;
+	
+}
